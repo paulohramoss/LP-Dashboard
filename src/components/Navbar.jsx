@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-import { Github, LayoutDashboard } from "lucide-react";
+import { Github } from "lucide-react";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="container navbar-content">
         <Link to="/" className="logo">
-          <LayoutDashboard className="logo-icon" size={28} />
+          <img src={logo} alt="FinanceDash" className="logo-img" />
           <span className="logo-text">FinanceDash</span>
         </Link>
         <a
@@ -51,8 +52,10 @@ const Navbar = () => {
           font-size: 1.25rem;
         }
 
-        .logo-icon {
-          color: var(--accent-primary);
+        .logo-img {
+          width: 32px;
+          height: 32px;
+          object-fit: contain;
         }
 
         .github-link {

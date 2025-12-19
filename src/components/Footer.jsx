@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Github, Linkedin, LayoutDashboard, Heart } from "lucide-react";
+import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
@@ -10,7 +11,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="footer-brand">
             <div className="logo">
-              <LayoutDashboard className="logo-icon" size={24} />
+              <img src={logo} alt="FinanceDash" className="logo-img" />
               <span className="logo-text">FinanceDash</span>
             </div>
             <p className="brand-description">
@@ -111,8 +112,10 @@ const Footer = () => {
           color: var(--text-primary);
         }
 
-        .logo-icon {
-          color: var(--accent-primary);
+        .logo-img {
+          width: 28px;
+          height: 28px;
+          object-fit: contain;
         }
 
         .brand-description {
