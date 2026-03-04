@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ArrowRight, ChevronRight, TrendingUp, PieChart, DollarSign } from "lucide-react";
+import { ArrowRight, ChevronRight, TrendingUp, TrendingDown, Wallet } from "lucide-react";
 import { motion } from "framer-motion";
 import dashboardPreview from "../assets/dashboard-preview.png";
 
@@ -126,8 +126,8 @@ const Hero = () => {
               <TrendingUp size={14} />
             </div>
             <div>
-              <p className="float-label">Receita do mês</p>
-              <p className="float-value success-text">+R$ 3.240</p>
+              <p className="float-label">Receitas</p>
+              <p className="float-value success-text">R$ 5.031,40</p>
             </div>
           </motion.div>
 
@@ -141,12 +141,12 @@ const Hero = () => {
               delay: 0.6,
             }}
           >
-            <div className="float-icon-wrap warning">
-              <PieChart size={14} />
+            <div className="float-icon-wrap danger">
+              <TrendingDown size={14} />
             </div>
             <div>
-              <p className="float-label">Taxa de economia</p>
-              <p className="float-value warning-text">32% do salário</p>
+              <p className="float-label">Despesas</p>
+              <p className="float-value danger-text">R$ 3.936,60</p>
             </div>
           </motion.div>
 
@@ -161,11 +161,11 @@ const Hero = () => {
             }}
           >
             <div className="float-icon-wrap purple">
-              <DollarSign size={14} />
+              <Wallet size={14} />
             </div>
             <div>
-              <p className="float-label">Saldo total</p>
-              <p className="float-value purple-text">R$ 12.850</p>
+              <p className="float-label">Saldo Total</p>
+              <p className="float-value purple-text">R$ 1.094,80</p>
             </div>
           </motion.div>
 
@@ -484,9 +484,9 @@ const Hero = () => {
           color: #10b981;
         }
 
-        .float-icon-wrap.warning {
-          background: rgba(245, 158, 11, 0.15);
-          color: #f59e0b;
+        .float-icon-wrap.danger {
+          background: rgba(239, 68, 68, 0.15);
+          color: #ef4444;
         }
 
         .float-icon-wrap.purple {
@@ -508,7 +508,7 @@ const Hero = () => {
         }
 
         .success-text { color: #10b981; }
-        .warning-text { color: #f59e0b; }
+        .danger-text { color: #ef4444; }
         .purple-text { color: var(--accent-secondary); }
 
         @media (max-width: 768px) {
