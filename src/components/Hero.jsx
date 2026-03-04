@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ArrowRight, ChevronRight, TrendingUp, TrendingDown, Wallet } from "lucide-react";
+import { ArrowRight, TrendingUp, TrendingDown, Wallet } from "lucide-react";
 import { motion } from "framer-motion";
 import dashboardPreview from "../assets/dashboard-preview.png";
 
@@ -46,17 +46,6 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="hero-text"
         >
-          <motion.div
-            className="badge"
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-          >
-            <span className="badge-dot"></span>
-            <span>Novo: Módulo de Investimentos</span>
-            <ChevronRight size={14} />
-          </motion.div>
-
           <h1 className="hero-title">
             Domine suas finanças com{" "}
             <span className="gradient-text">
