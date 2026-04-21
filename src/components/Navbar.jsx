@@ -135,8 +135,8 @@ const Navbar = () => {
         }
 
         .logo-img {
-          width: 28px;
-          height: 28px;
+          width: 50px;
+          height: 50px;
           object-fit: contain;
         }
 
