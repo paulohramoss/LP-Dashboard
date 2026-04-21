@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { ArrowRight, TrendingUp, TrendingDown, Wallet } from "lucide-react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import dashboardPreview from "../assets/dashboard-preview.png";
 
-const typingWords = ["Inteligência", "Praticidade", "Controle", "Liberdade"];
+const typingWords = ["Inteligência", "Facilidade", "Controle", "Liberdade"];
 
 const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -13,452 +14,425 @@ const Hero = () => {
   useEffect(() => {
     const word = typingWords[currentWordIndex];
     let timeout;
-
     if (!isDeleting && displayText === word) {
-      timeout = setTimeout(() => setIsDeleting(true), 2200);
+      timeout = setTimeout(() => setIsDeleting(true), 2400);
     } else if (isDeleting && displayText === "") {
-      setIsDeleting(false);
-      setCurrentWordIndex((prev) => (prev + 1) % typingWords.length);
+      timeout = setTimeout(() => {
+        setIsDeleting(false);
+        setCurrentWordIndex((prev) => (prev + 1) % typingWords.length);
+      }, 0);
     } else {
-      timeout = setTimeout(
-        () => {
-          setDisplayText((prev) =>
-            isDeleting ? prev.slice(0, -1) : word.slice(0, prev.length + 1)
-          );
-        },
-        isDeleting ? 55 : 95
-      );
+      timeout = setTimeout(() => {
+        setDisplayText((prev) =>
+          isDeleting ? prev.slice(0, -1) : word.slice(0, prev.length + 1)
+        );
+      }, isDeleting ? 48 : 88);
     }
-
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, currentWordIndex]);
 
   return (
     <section className="hero">
-      <div className="bg-gradient"></div>
-      <div className="bg-orb bg-orb-1"></div>
-      <div className="bg-orb bg-orb-2"></div>
+      <div className="hero-grid-bg" />
+      <div className="hero-orb orb-1" />
+      <div className="hero-orb orb-2" />
+      <div className="hero-orb orb-3" />
 
-      <div className="container hero-content">
+      <div className="container hero-layout">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
           className="hero-text"
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
         >
+          <div className="hero-badge">
+            <span className="badge-pulse" />
+            Dashboard Financeiro Pessoal
+          </div>
+
           <h1 className="hero-title">
-            Domine suas finanças com{" "}
-            <span className="gradient-text">
+            Domine suas<br />
+            finanças com{" "}
+            <span className="hero-accent">
               {displayText}
-              <span className="cursor">|</span>
+              <span className="cursor" />
             </span>
           </h1>
 
-          <p className="hero-subtitle">
-            O FinanceDash transforma a maneira como você gerencia seu dinheiro.
-            Dashboard interativo, controle de gastos e planejamento futuro em
-            uma única plataforma.
+          <p className="hero-sub">
+            Transforme dados em decisões. Dashboard interativo, múltiplas
+            carteiras, orçamentos inteligentes e relatórios — tudo gratuito,
+            tudo num só lugar.
           </p>
 
           <div className="hero-actions">
-            <a
-              href="https://moovia.vercel.app/login"
-              className="btn btn-primary"
-            >
-              Começar Agora — É Gratuito
-              <ArrowRight size={18} />
+            <a href="https://moovia.vercel.app/login" className="btn-cta">
+              Começar Gratuitamente
+              <ArrowRight size={17} />
             </a>
-            <a href="#features" className="btn btn-secondary">
-              Conhecer Recursos
+            <a href="#features" className="btn-outline">
+              Ver Recursos
             </a>
           </div>
 
           <div className="social-proof">
             <div className="avatars">
-              {["P", "G", "M", "L", "A"].map((letter, i) => (
-                <div
-                  key={i}
-                  className="avatar"
-                  style={{
-                    zIndex: 5 - i,
-                    background: [
-                      "#7c3aed",
-                      "#2563eb",
-                      "#059669",
-                      "#d97706",
-                      "#db2777",
-                    ][i],
-                  }}
-                >
-                  {letter}
+              {[
+                { l: "P", c: "#6C2BD9" },
+                { l: "G", c: "#2563eb" },
+                { l: "M", c: "#00c96a" },
+                { l: "L", c: "#d97706" },
+                { l: "A", c: "#db2777" },
+              ].map((a, i) => (
+                <div key={i} className="avatar" style={{ zIndex: 5 - i, background: a.c }}>
+                  {a.l}
                 </div>
               ))}
             </div>
-            <p className="social-text">
-              <strong>+5.000 usuários</strong> já controlam suas finanças
+            <p className="proof-text">
+              <strong>+5.000 usuários</strong> no controle das suas finanças
             </p>
           </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 40 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.3 }}
-          className="hero-image-wrapper"
+          className="hero-visual"
+          initial={{ opacity: 0, x: 40, scale: 0.96 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          transition={{ duration: 1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         >
           <motion.div
-            className="float-card float-card-1"
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+            className="float-card fc-top"
+            animate={{ y: [0, -9, 0] }}
+            transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
           >
-            <div className="float-icon-wrap success">
-              <TrendingUp size={14} />
-            </div>
+            <div className="fc-icon i-green"><TrendingUp size={13} /></div>
             <div>
-              <p className="float-label">Receitas</p>
-              <p className="float-value success-text">R$ 5.031,40</p>
+              <p className="fc-label">Receitas</p>
+              <p className="fc-val v-green">R$ 5.031,40</p>
             </div>
           </motion.div>
 
           <motion.div
-            className="float-card float-card-2"
+            className="float-card fc-right"
             animate={{ y: [0, 10, 0] }}
-            transition={{
-              duration: 3.8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.6,
-            }}
+            transition={{ duration: 4.1, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
           >
-            <div className="float-icon-wrap danger">
-              <TrendingDown size={14} />
-            </div>
+            <div className="fc-icon i-red"><TrendingDown size={13} /></div>
             <div>
-              <p className="float-label">Despesas</p>
-              <p className="float-value danger-text">R$ 3.936,60</p>
+              <p className="fc-label">Despesas</p>
+              <p className="fc-val v-red">R$ 3.936,60</p>
             </div>
           </motion.div>
 
           <motion.div
-            className="float-card float-card-3"
+            className="float-card fc-left"
             animate={{ y: [0, -6, 0] }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1,
-            }}
+            transition={{ duration: 3.9, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
           >
-            <div className="float-icon-wrap purple">
-              <Wallet size={14} />
-            </div>
+            <div className="fc-icon i-purple"><Wallet size={13} /></div>
             <div>
-              <p className="float-label">Saldo Total</p>
-              <p className="float-value purple-text">R$ 1.094,80</p>
+              <p className="fc-label">Saldo Total</p>
+              <p className="fc-val v-purple">R$ 1.094,80</p>
             </div>
           </motion.div>
 
-          <div className="hero-image-container">
-            <img
-              src={dashboardPreview}
-              alt="FinanceDash Dashboard Preview"
-              className="dashboard-preview"
-            />
+          <div className="dashboard-frame">
+            <img src={dashboardPreview} alt="EazyDash preview" className="dashboard-img" />
           </div>
-          <div className="glow-effect"></div>
+          <div className="frame-glow" />
         </motion.div>
       </div>
 
       <style>{`
         .hero {
           position: relative;
-          padding-top: 140px;
-          padding-bottom: 80px;
-          overflow: hidden;
+          padding-top: 120px;
+          padding-bottom: 100px;
           min-height: 100vh;
+          display: flex;
+          align-items: center;
+          overflow: hidden;
         }
 
-        .bg-gradient {
+        .hero-grid-bg {
           position: absolute;
-          top: -20%;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 80%;
-          height: 60%;
-          background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(10, 10, 22, 0) 70%);
-          z-index: 0;
-          filter: blur(80px);
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+          background-size: 60px 60px;
+          mask-image: radial-gradient(ellipse 80% 70% at 65% 40%, black 20%, transparent 80%);
+          -webkit-mask-image: radial-gradient(ellipse 80% 70% at 65% 40%, black 20%, transparent 80%);
           pointer-events: none;
         }
 
-        .bg-orb {
+        .hero-orb {
           position: absolute;
           border-radius: 50%;
-          filter: blur(100px);
           pointer-events: none;
-          z-index: 0;
         }
 
-        .bg-orb-1 {
-          width: 500px;
-          height: 500px;
-          background: rgba(124, 58, 237, 0.08);
-          top: 10%;
-          left: -10%;
-          animation: orbFloat1 10s ease-in-out infinite;
+        .orb-1 {
+          width: 700px;
+          height: 700px;
+          background: rgba(108, 43, 217, 0.16);
+          filter: blur(100px);
+          top: -15%;
+          right: -8%;
+          animation: orbDrift 14s ease-in-out infinite;
         }
 
-        .bg-orb-2 {
-          width: 400px;
-          height: 400px;
-          background: rgba(37, 99, 235, 0.06);
-          bottom: 0;
-          right: -5%;
-          animation: orbFloat2 12s ease-in-out infinite;
+        .orb-2 {
+          width: 450px;
+          height: 450px;
+          background: rgba(0, 232, 122, 0.07);
+          filter: blur(90px);
+          bottom: -5%;
+          left: 2%;
+          animation: orbDrift 18s ease-in-out infinite reverse;
         }
 
-        @keyframes orbFloat1 {
+        .orb-3 {
+          width: 300px;
+          height: 300px;
+          background: rgba(108, 43, 217, 0.1);
+          filter: blur(120px);
+          top: 50%;
+          left: 35%;
+          transform: translateY(-50%);
+          animation: orbDrift 10s ease-in-out infinite;
+        }
+
+        @keyframes orbDrift {
           0%, 100% { transform: translate(0, 0); }
-          50% { transform: translate(30px, -30px); }
+          33% { transform: translate(20px, -25px); }
+          66% { transform: translate(-15px, 15px); }
         }
 
-        @keyframes orbFloat2 {
-          0%, 100% { transform: translate(0, 0); }
-          50% { transform: translate(-20px, 20px); }
-        }
-
-        .hero-content {
-          display: flex;
-          flex-direction: column;
+        .hero-layout {
+          display: grid;
+          grid-template-columns: 1fr 1.05fr;
+          gap: 5rem;
           align-items: center;
-          text-align: center;
-          gap: 4rem;
           position: relative;
           z-index: 1;
         }
 
         .hero-text {
-          max-width: 800px;
-          width: 100%;
           display: flex;
           flex-direction: column;
-          align-items: center;
+          align-items: flex-start;
         }
 
-        .badge {
+        .hero-badge {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          padding: 0.4rem 1rem;
-          background: rgba(124, 58, 237, 0.1);
-          border: 1px solid rgba(124, 58, 237, 0.25);
+          padding: 0.35rem 1rem;
+          background: rgba(0, 232, 122, 0.08);
+          border: 1px solid rgba(0, 232, 122, 0.22);
           border-radius: 100px;
-          color: var(--accent-secondary);
-          font-size: 0.875rem;
-          font-weight: 500;
-          margin-bottom: 1.5rem;
+          color: var(--green);
+          font-size: 0.78rem;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          margin-bottom: 2rem;
+          font-family: var(--font-body);
         }
 
-        .badge-dot {
+        .badge-pulse {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: var(--accent-secondary);
-          animation: pulse-dot 2s ease-in-out infinite;
+          background: var(--green);
+          box-shadow: 0 0 8px var(--green);
+          animation: bpulse 2s ease-in-out infinite;
+          flex-shrink: 0;
+          display: inline-block;
         }
 
-        @keyframes pulse-dot {
+        @keyframes bpulse {
           0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.5; transform: scale(0.7); }
+          50% { opacity: 0.4; transform: scale(0.75); }
         }
 
         .hero-title {
-          font-size: clamp(2.5rem, 5vw, 4.5rem);
+          font-family: var(--font-display);
+          font-size: clamp(2.75rem, 4.2vw, 4.25rem);
           font-weight: 800;
-          line-height: 1.1;
+          line-height: 1.06;
+          letter-spacing: -0.03em;
+          color: var(--text-primary);
           margin-bottom: 1.5rem;
-          letter-spacing: -0.02em;
         }
 
-        .gradient-text {
-          background: linear-gradient(135deg, #fff 0%, var(--accent-secondary) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          display: inline-block;
-          min-width: 2ch;
+        .hero-accent {
+          display: block;
+          color: var(--green);
+          min-height: 1.12em;
         }
 
         .cursor {
           display: inline-block;
-          margin-left: 2px;
-          background: linear-gradient(135deg, #fff 0%, var(--accent-secondary) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          animation: blink 1s step-end infinite;
+          width: 3px;
+          height: 0.82em;
+          background: var(--green);
+          margin-left: 3px;
+          vertical-align: text-bottom;
+          border-radius: 2px;
+          animation: cblink 1s step-end infinite;
         }
 
-        @keyframes blink {
+        @keyframes cblink {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
         }
 
-        .hero-subtitle {
-          font-size: clamp(1.125rem, 2vw, 1.25rem);
+        .hero-sub {
+          font-size: 1.08rem;
           color: var(--text-secondary);
+          line-height: 1.7;
           margin-bottom: 2.5rem;
-          max-width: 600px;
-          line-height: 1.6;
+          max-width: 460px;
+          font-family: var(--font-body);
         }
 
         .hero-actions {
           display: flex;
-          gap: 1rem;
+          gap: 0.875rem;
           flex-wrap: wrap;
-          justify-content: center;
-          margin-bottom: 2rem;
+          margin-bottom: 2.5rem;
         }
 
-        .btn {
+        .btn-cta {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          padding: 0.85rem 2rem;
+          padding: 0.9rem 2rem;
+          background: var(--purple);
+          color: white;
+          border-radius: var(--radius-lg);
+          font-weight: 700;
+          font-size: 0.95rem;
+          font-family: var(--font-body);
+          letter-spacing: -0.01em;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 20px rgba(108, 43, 217, 0.45);
+        }
+
+        .btn-cta:hover {
+          background: #5A22C0;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 32px rgba(108, 43, 217, 0.6);
+        }
+
+        .btn-outline {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.9rem 1.75rem;
+          background: rgba(255, 255, 255, 0.04);
+          color: var(--text-primary);
+          border: 1px solid var(--border);
           border-radius: var(--radius-lg);
           font-weight: 600;
-          font-size: 1rem;
-          transition: all 0.3s ease;
-          cursor: pointer;
+          font-size: 0.95rem;
+          font-family: var(--font-body);
+          transition: all 0.25s ease;
         }
 
-        .btn-primary {
-          background: var(--accent-primary);
-          color: white;
-          box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
+        .btn-outline:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.12);
+          transform: translateY(-1px);
         }
 
-        .btn-primary:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 30px rgba(124, 58, 237, 0.55);
-          background: #6d28d9;
-        }
-
-        .btn-secondary {
-          background: rgba(255, 255, 255, 0.05);
-          color: white;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-secondary:hover {
-          background: rgba(255, 255, 255, 0.1);
-          transform: translateY(-2px);
-          border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Social Proof */
         .social-proof {
           display: flex;
           align-items: center;
           gap: 0.75rem;
-          margin-top: 0.5rem;
         }
 
-        .avatars {
-          display: flex;
-        }
+        .avatars { display: flex; }
 
         .avatar {
           width: 32px;
           height: 32px;
           border-radius: 50%;
-          color: white;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.7rem;
+          font-size: 0.68rem;
           font-weight: 700;
+          color: white;
           border: 2px solid var(--bg-primary);
           margin-left: -8px;
+          font-family: var(--font-body);
         }
 
-        .avatars .avatar:first-child {
-          margin-left: 0;
-        }
+        .avatars .avatar:first-child { margin-left: 0; }
 
-        .social-text {
+        .proof-text {
           font-size: 0.875rem;
           color: var(--text-secondary);
+          font-family: var(--font-body);
         }
 
-        .social-text strong {
-          color: var(--text-primary);
-        }
+        .proof-text strong { color: var(--text-primary); }
 
-        /* Hero Image */
-        .hero-image-wrapper {
-          width: 100%;
-          max-width: 1000px;
-          position: relative;
-        }
+        .hero-visual { position: relative; }
 
-        .hero-image-container {
-          background: rgba(19, 19, 43, 0.5);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: var(--radius-lg);
-          box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.6);
+        .dashboard-frame {
+          background: rgba(13, 15, 30, 0.7);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 18px;
           overflow: hidden;
+          box-shadow:
+            0 40px 80px -10px rgba(0, 0, 0, 0.7),
+            0 0 0 1px rgba(108, 43, 217, 0.12),
+            inset 0 1px 0 rgba(255, 255, 255, 0.06);
           line-height: 0;
+          position: relative;
+          z-index: 1;
         }
 
-        .dashboard-preview {
+        .dashboard-img {
           width: 100%;
           height: auto;
           display: block;
         }
 
-        .glow-effect {
+        .frame-glow {
           position: absolute;
-          inset: -20px;
-          background: linear-gradient(180deg, rgba(124, 58, 237, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
-          z-index: -1;
-          filter: blur(40px);
-          border-radius: var(--radius-lg);
+          inset: -40px;
+          background: radial-gradient(ellipse at 50% 30%, rgba(108, 43, 217, 0.28) 0%, transparent 65%);
+          z-index: 0;
+          filter: blur(20px);
+          pointer-events: none;
         }
 
-        /* Floating Cards */
         .float-card {
           position: absolute;
           display: flex;
           align-items: center;
-          gap: 0.6rem;
-          padding: 0.6rem 1rem;
-          background: rgba(13, 13, 30, 0.85);
-          backdrop-filter: blur(16px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 12px;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+          gap: 0.55rem;
+          padding: 0.55rem 0.9rem;
+          background: rgba(7, 8, 15, 0.92);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.09);
+          border-radius: 11px;
+          box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
           z-index: 10;
           white-space: nowrap;
         }
 
-        .float-card-1 {
-          top: -16px;
-          left: -20px;
-        }
+        .fc-top   { top: -14px; left: -18px; }
+        .fc-right { bottom: 55px; right: -18px; }
+        .fc-left  { top: 42%; left: -22px; }
 
-        .float-card-2 {
-          bottom: 60px;
-          right: -20px;
-        }
-
-        .float-card-3 {
-          top: 40%;
-          left: -24px;
-        }
-
-        .float-icon-wrap {
+        .fc-icon {
           width: 28px;
           height: 28px;
           border-radius: 8px;
@@ -468,43 +442,57 @@ const Hero = () => {
           flex-shrink: 0;
         }
 
-        .float-icon-wrap.success {
-          background: rgba(16, 185, 129, 0.15);
-          color: #10b981;
-        }
+        .i-green  { background: rgba(0, 232, 122, 0.12); color: var(--green); }
+        .i-red    { background: rgba(255, 68, 85, 0.12);  color: #FF4455; }
+        .i-purple { background: rgba(108, 43, 217, 0.15); color: var(--purple-bright); }
 
-        .float-icon-wrap.danger {
-          background: rgba(239, 68, 68, 0.15);
-          color: #ef4444;
-        }
-
-        .float-icon-wrap.purple {
-          background: rgba(124, 58, 237, 0.15);
-          color: var(--accent-secondary);
-        }
-
-        .float-label {
-          font-size: 0.7rem;
+        .fc-label {
+          font-size: 0.64rem;
           color: var(--text-secondary);
           line-height: 1;
           margin-bottom: 2px;
+          font-family: var(--font-body);
         }
 
-        .float-value {
-          font-size: 0.85rem;
+        .fc-val {
+          font-size: 0.82rem;
           font-weight: 700;
           line-height: 1;
+          font-family: var(--font-mono);
         }
 
-        .success-text { color: #10b981; }
-        .danger-text { color: #ef4444; }
-        .purple-text { color: var(--accent-secondary); }
+        .v-green  { color: var(--green); }
+        .v-red    { color: #FF4455; }
+        .v-purple { color: var(--purple-bright); }
 
-        @media (max-width: 768px) {
-          .float-card-1 { top: -12px; left: 8px; }
-          .float-card-2 { bottom: 40px; right: 8px; }
-          .float-card-3 { display: none; }
-          .hero-title { font-size: 2.2rem; }
+        @media (max-width: 1024px) {
+          .hero-layout {
+            grid-template-columns: 1fr;
+            gap: 3.5rem;
+          }
+          .hero-text {
+            align-items: center;
+            text-align: center;
+          }
+          .hero-title { text-align: center; }
+          .hero-sub {
+            text-align: center;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .hero-actions { justify-content: center; }
+          .social-proof { justify-content: center; }
+          .hero-visual { max-width: 640px; margin: 0 auto; width: 100%; }
+          .fc-left { display: none; }
+          .fc-top  { top: -10px; left: 8px; }
+          .fc-right { bottom: 40px; right: 8px; }
+        }
+
+        @media (max-width: 600px) {
+          .hero { padding-top: 100px; padding-bottom: 60px; }
+          .hero-title { font-size: 2.4rem; }
+          .fc-top, .fc-right { display: none; }
         }
       `}</style>
     </section>

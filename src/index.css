@@ -1,32 +1,58 @@
 :root {
-  --bg-primary: #0a0a16;
-  --bg-secondary: #13132b;
-  --accent-primary: #7c3aed;
-  --accent-secondary: #a78bfa;
-  --text-primary: #ffffff;
-  --text-secondary: #94a3b8;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-  
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  
+  --bg-primary: #07080F;
+  --bg-secondary: #0D0F1E;
+  --bg-card: rgba(255, 255, 255, 0.025);
+
+  --purple: #6C2BD9;
+  --purple-bright: #9B6DFF;
+  --purple-muted: rgba(108, 43, 217, 0.12);
+  --purple-glow: rgba(108, 43, 217, 0.28);
+
+  --green: #00E87A;
+  --green-muted: rgba(0, 232, 122, 0.1);
+  --green-glow: rgba(0, 232, 122, 0.2);
+
+  --text-primary: #EEF0FF;
+  --text-secondary: #636380;
+  --text-muted: #3A3A58;
+
+  --border: rgba(255, 255, 255, 0.055);
+  --border-hover: rgba(108, 43, 217, 0.3);
+
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-xl: 1.5rem;
   --radius-lg: 1rem;
-  --radius-md: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-sm: 0.375rem;
+
+  /* backwards compat */
+  --accent-primary: #6C2BD9;
+  --accent-secondary: #9B6DFF;
+  --success: #00E87A;
+  --warning: #F59E0B;
+  --danger: #FF4455;
 }
 
-* {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -43,6 +69,7 @@ button {
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   font-weight: 700;
+  font-family: var(--font-display);
 }
 
 .container {
@@ -51,20 +78,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 1.5rem;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--bg-secondary);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-primary);
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: rgba(108, 43, 217, 0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--purple); }

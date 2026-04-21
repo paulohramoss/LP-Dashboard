@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:eazydash.vercel.app)",
+      "Bash(git checkout *)",
+      "Bash(npm install *)",
+      "Bash(npm run *)"
+    ]
+  }
+}

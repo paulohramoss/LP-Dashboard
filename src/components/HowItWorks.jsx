@@ -8,30 +8,31 @@ const steps = [
     icon: <UserPlus size={28} />,
     title: "Crie sua conta",
     description:
-      "Cadastro gratuito em menos de 1 minuto. Sem cartão de crédito, sem burocracia. Comece a usar imediatamente.",
-    color: "#7c3aed",
+      "Cadastro gratuito em menos de 1 minuto. Sem cartão de crédito, sem burocracia.",
+    color: "#9B6DFF",
   },
   {
     number: "02",
     icon: <LayoutDashboard size={28} />,
     title: "Organize suas finanças",
     description:
-      "Adicione suas carteiras, registre receitas e despesas por categoria. Importe extratos bancários com um clique.",
-    color: "#2563eb",
+      "Adicione carteiras, registre receitas e despesas por categoria. Importe extratos bancários.",
+    color: "#00E87A",
   },
   {
     number: "03",
     icon: <Target size={28} />,
     title: "Alcance seus objetivos",
     description:
-      "Visualize relatórios detalhados, defina metas de economia e tome decisões financeiras com mais confiança.",
-    color: "#059669",
+      "Visualize relatórios, defina metas e tome decisões financeiras com confiança.",
+    color: "#38BDF8",
   },
 ];
 
 const HowItWorks = () => {
   return (
     <section id="how-it-works" className="how-section">
+      <div className="how-glow" />
       <div className="container">
         <motion.div
           className="section-header"
@@ -40,40 +41,43 @@ const HowItWorks = () => {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-label">Como funciona</span>
+          <span className="section-label">Como Funciona</span>
           <h2 className="section-title">Simples do início ao fim</h2>
-          <p className="section-subtitle">
+          <p className="section-sub">
             Em três passos você já tem controle total das suas finanças
           </p>
         </motion.div>
 
-        <div className="steps-container">
-          {steps.map((step, index) => (
-            <React.Fragment key={index}>
+        <div className="steps-row">
+          {steps.map((step, i) => (
+            <React.Fragment key={i}>
               <motion.div
                 className="step-card"
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.55, delay: index * 0.15 }}
-                style={{ "--step-color": step.color }}
+                transition={{ duration: 0.6, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                style={{ "--sc": step.color }}
               >
-                <div className="step-number">{step.number}</div>
-                <div className="step-icon-wrap">
-                  <div className="step-icon">{step.icon}</div>
-                </div>
+                <div className="step-num">{step.number}</div>
+                <div className="step-icon">{step.icon}</div>
                 <h3 className="step-title">{step.title}</h3>
                 <p className="step-desc">{step.description}</p>
+                <div className="step-accent" />
               </motion.div>
 
-              {index < steps.length - 1 && (
+              {i < steps.length - 1 && (
                 <motion.div
-                  className="step-connector"
+                  className="step-arrow"
                   initial={{ opacity: 0, scaleX: 0 }}
                   whileInView={{ opacity: 1, scaleX: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.15 + 0.3 }}
-                />
+                  transition={{ duration: 0.5, delay: i * 0.15 + 0.35 }}
+                >
+                  <div className="arrow-line" />
+                  <div className="arrow-head" />
+                </motion.div>
               )}
             </React.Fragment>
           ))}
@@ -86,191 +90,235 @@ const HowItWorks = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <a href="https://moovia.vercel.app/login" className="btn-how-cta">
+          <a href="https://moovia.vercel.app/login" className="btn-how">
             Começar agora — é gratuito
           </a>
-          <p className="how-cta-note">Sem cartão de crédito • Cancele quando quiser</p>
+          <p className="how-note">Sem cartão de crédito · Cancele quando quiser</p>
         </motion.div>
       </div>
 
       <style>{`
         .how-section {
           padding: 100px 0;
-          background: var(--bg-primary);
+          background: var(--bg-secondary);
+          border-top: 1px solid var(--border);
           position: relative;
           overflow: hidden;
         }
 
-        .how-section::before {
-          content: '';
+        .how-glow {
           position: absolute;
+          width: 600px;
+          height: 600px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(108, 43, 217, 0.08) 0%, transparent 70%);
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 600px;
-          height: 600px;
-          background: radial-gradient(circle, rgba(124,58,237,0.05) 0%, transparent 70%);
           pointer-events: none;
+          filter: blur(40px);
         }
 
         .section-header {
           text-align: center;
-          margin-bottom: 4.5rem;
+          margin-bottom: 5rem;
           display: flex;
           flex-direction: column;
           align-items: center;
+          position: relative;
+          z-index: 1;
         }
 
         .section-label {
           display: inline-block;
           padding: 0.3rem 1rem;
-          background: rgba(124, 58, 237, 0.1);
-          border: 1px solid rgba(124, 58, 237, 0.2);
+          background: rgba(108, 43, 217, 0.1);
+          border: 1px solid rgba(108, 43, 217, 0.22);
           border-radius: 100px;
-          color: var(--accent-secondary);
-          font-size: 0.8rem;
+          color: var(--purple-bright);
+          font-size: 0.78rem;
           font-weight: 600;
           letter-spacing: 0.08em;
           text-transform: uppercase;
           margin-bottom: 1rem;
+          font-family: var(--font-body);
         }
 
         .section-title {
-          font-size: 2.5rem;
+          font-family: var(--font-display);
+          font-size: clamp(2rem, 3.5vw, 2.75rem);
+          font-weight: 800;
+          letter-spacing: -0.03em;
           margin-bottom: 1rem;
-          background: linear-gradient(to right, #fff, #94a3b8);
+          background: linear-gradient(160deg, var(--text-primary) 40%, rgba(238,240,255,0.5) 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
 
-        .section-subtitle {
+        .section-sub {
           color: var(--text-secondary);
-          font-size: 1.125rem;
-          max-width: 500px;
+          font-size: 1.05rem;
+          max-width: 460px;
           line-height: 1.6;
+          font-family: var(--font-body);
         }
 
-        .steps-container {
+        .steps-row {
           display: flex;
-          align-items: flex-start;
+          align-items: center;
           justify-content: center;
           gap: 0;
           position: relative;
+          z-index: 1;
+          margin-bottom: 4rem;
         }
 
         .step-card {
           flex: 1;
           max-width: 300px;
-          padding: 2rem 1.75rem;
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.07);
-          border-radius: var(--radius-lg);
+          padding: 2.25rem 2rem;
+          background: rgba(255, 255, 255, 0.022);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-xl);
           text-align: center;
           position: relative;
-          transition: background 0.3s, border-color 0.3s;
+          overflow: hidden;
+          cursor: default;
+          transition: border-color 0.3s, background 0.3s;
         }
 
         .step-card:hover {
-          background: rgba(255,255,255,0.04);
-          border-color: rgba(124,58,237,0.2);
+          border-color: color-mix(in srgb, var(--sc) 30%, transparent);
+          background: rgba(255, 255, 255, 0.04);
         }
 
-        .step-number {
-          font-size: 3rem;
-          font-weight: 900;
-          color: var(--step-color);
-          opacity: 0.12;
+        .step-accent {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: var(--sc);
+          opacity: 0.4;
+          transition: opacity 0.3s;
+        }
+
+        .step-card:hover .step-accent { opacity: 0.9; }
+
+        .step-num {
+          font-family: var(--font-mono);
+          font-size: 3.5rem;
+          font-weight: 700;
+          color: var(--sc);
+          opacity: 0.1;
           line-height: 1;
-          margin-bottom: 1.25rem;
-          font-variant-numeric: tabular-nums;
-        }
-
-        .step-icon-wrap {
-          display: flex;
-          justify-content: center;
-          margin-bottom: 1.25rem;
+          margin-bottom: 1.5rem;
+          letter-spacing: -0.05em;
         }
 
         .step-icon {
-          width: 60px;
-          height: 60px;
-          border-radius: 16px;
+          width: 64px;
+          height: 64px;
+          border-radius: 18px;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: color-mix(in srgb, var(--step-color) 12%, transparent);
-          color: var(--step-color);
-          border: 1px solid color-mix(in srgb, var(--step-color) 20%, transparent);
+          background: color-mix(in srgb, var(--sc) 10%, transparent);
+          color: var(--sc);
+          border: 1px solid color-mix(in srgb, var(--sc) 18%, transparent);
+          margin: 0 auto 1.5rem;
         }
 
         .step-title {
-          font-size: 1.2rem;
+          font-family: var(--font-display);
+          font-size: 1.15rem;
+          font-weight: 700;
           color: var(--text-primary);
           margin-bottom: 0.75rem;
+          letter-spacing: -0.02em;
         }
 
         .step-desc {
-          color: var(--text-secondary);
+          font-family: var(--font-body);
           font-size: 0.9rem;
+          color: var(--text-secondary);
           line-height: 1.65;
         }
 
-        .step-connector {
-          width: 60px;
-          height: 2px;
-          background: linear-gradient(to right, rgba(124,58,237,0.3), rgba(37,99,235,0.3));
-          margin-top: 100px;
-          transform-origin: left;
+        .step-arrow {
+          display: flex;
+          align-items: center;
+          padding: 0 1rem;
+          transform-origin: left center;
           flex-shrink: 0;
         }
 
+        .arrow-line {
+          width: 50px;
+          height: 1px;
+          background: linear-gradient(90deg, rgba(108,43,217,0.4), rgba(0,232,122,0.3));
+        }
+
+        .arrow-head {
+          width: 0;
+          height: 0;
+          border-top: 5px solid transparent;
+          border-bottom: 5px solid transparent;
+          border-left: 7px solid rgba(0, 232, 122, 0.4);
+          margin-left: -1px;
+        }
+
         .how-cta {
-          text-align: center;
-          margin-top: 3.5rem;
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 0.75rem;
+          position: relative;
+          z-index: 1;
         }
 
-        .btn-how-cta {
-          display: inline-block;
+        .btn-how {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
           padding: 0.9rem 2.5rem;
-          background: var(--accent-primary);
+          background: var(--purple);
           color: white;
           border-radius: var(--radius-lg);
           font-weight: 700;
           font-size: 1rem;
+          font-family: var(--font-body);
+          letter-spacing: -0.01em;
           transition: all 0.3s ease;
-          box-shadow: 0 4px 20px rgba(124,58,237,0.35);
+          box-shadow: 0 4px 20px rgba(108, 43, 217, 0.4);
         }
 
-        .btn-how-cta:hover {
-          background: #6d28d9;
+        .btn-how:hover {
+          background: #5A22C0;
           transform: translateY(-2px);
-          box-shadow: 0 8px 30px rgba(124,58,237,0.5);
+          box-shadow: 0 8px 32px rgba(108, 43, 217, 0.55);
         }
 
-        .how-cta-note {
+        .how-note {
           font-size: 0.8rem;
           color: var(--text-secondary);
+          font-family: var(--font-body);
         }
 
-        @media (max-width: 768px) {
-          .steps-container {
+        @media (max-width: 800px) {
+          .steps-row {
             flex-direction: column;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1.25rem;
           }
-          .step-connector {
-            width: 2px;
-            height: 32px;
-            margin-top: 0;
-            background: linear-gradient(to bottom, rgba(124,58,237,0.3), rgba(37,99,235,0.3));
-            transform-origin: top;
+          .step-arrow {
+            transform: rotate(90deg);
+            padding: 0;
           }
+          .arrow-line { width: 30px; }
           .step-card { max-width: 100%; width: 100%; }
+          .how-section { padding: 70px 0; }
         }
       `}</style>
     </section>

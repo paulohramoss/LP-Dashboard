@@ -1,35 +1,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Github, Linkedin, LayoutDashboard, Heart } from "lucide-react";
+import { Github, Linkedin, Heart } from "lucide-react";
 import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer-content">
-          {/* Brand Section */}
+        <div className="footer-grid">
           <div className="footer-brand">
-            <div className="logo">
-              <img src={logo} alt="FinanceDash" className="logo-img" />
-              <span className="logo-text">FinanceDash</span>
+            <div className="footer-logo">
+              <img src={logo} alt="EazyDash" className="footer-logo-img" />
+              <span className="footer-logo-text">EazyDash</span>
             </div>
-            <p className="brand-description">
-              Seu controle financeiro pessoal, simplificado e inteligente. Tome
-              melhores decisões com dados precisos.
+            <p className="footer-desc">
+              Seu controle financeiro pessoal, simplificado e inteligente.
+              Tome melhores decisões com dados precisos.
             </p>
           </div>
 
-          {/* Links Section */}
-          <div className="footer-links-group">
-            <h4>Projeto</h4>
+          <div className="footer-col">
+            <h4 className="footer-col-title">Projeto</h4>
             <a
               href="https://github.com/paulohramoss/Dashboard"
               target="_blank"
               rel="noopener noreferrer"
               className="footer-link"
             >
-              <Github size={16} />
+              <Github size={15} />
               Repositório GitHub
             </a>
             <Link to="/termos-de-uso" className="footer-link">
@@ -40,48 +38,43 @@ const Footer = () => {
             </Link>
           </div>
 
-          {/* Developers Section */}
-          <div className="footer-links-group">
-            <h4>Desenvolvido por</h4>
-            <div className="developers-list">
+          <div className="footer-col">
+            <h4 className="footer-col-title">Desenvolvedores</h4>
+            <div className="devs">
               <a
                 href="https://www.linkedin.com/in/paulo-ramos-83402818a/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="dev-card"
               >
-                <div className="dev-avatar">PR</div>
+                <div className="dev-avatar" style={{ background: "#6C2BD9" }}>PR</div>
                 <div className="dev-info">
                   <span className="dev-name">Paulo Ramos</span>
                   <span className="dev-role">Full Stack Developer</span>
                 </div>
-                <Linkedin size={16} className="dev-icon" />
+                <Linkedin size={14} className="dev-li" />
               </a>
-
               <a
                 href="https://www.linkedin.com/in/gabriel-schmitz-donada-760678233"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="dev-card"
               >
-                <div className="dev-avatar">GD</div>
+                <div className="dev-avatar" style={{ background: "#2563eb" }}>GD</div>
                 <div className="dev-info">
                   <span className="dev-name">Gabriel Donada</span>
                   <span className="dev-role">Frontend Developer</span>
                 </div>
-                <Linkedin size={16} className="dev-icon" />
+                <Linkedin size={14} className="dev-li" />
               </a>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} FinanceDash.</p>
+          <p>© {new Date().getFullYear()} EazyDash. Todos os direitos reservados.</p>
           <div className="made-with">
-            <span>Feito com</span>
-            <Heart size={14} className="heart-icon" />
-            <span>e React</span>
+            Feito com <Heart size={13} className="heart" /> e React
           </div>
         </div>
       </div>
@@ -89,100 +82,106 @@ const Footer = () => {
       <style>{`
         .footer {
           background: var(--bg-secondary);
-          padding: 80px 0 30px;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-          margin-top: auto;
+          padding: 80px 0 28px;
+          border-top: 1px solid var(--border);
         }
 
-        .footer-content {
+        .footer-grid {
           display: grid;
-          grid-template-columns: 1.5fr 1fr 1.2fr;
+          grid-template-columns: 1.4fr 1fr 1.2fr;
           gap: 4rem;
-          margin-bottom: 5rem;
+          margin-bottom: 4rem;
         }
 
-        /* Brand Styles */
-        .footer-brand .logo {
+        .footer-logo {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
-          margin-bottom: 1.5rem;
-          font-weight: 700;
-          font-size: 1.25rem;
-          color: var(--text-primary);
+          gap: 0.6rem;
+          margin-bottom: 1.25rem;
         }
 
-        .logo-img {
-          width: 28px;
-          height: 28px;
+        .footer-logo-img {
+          width: 26px;
+          height: 26px;
           object-fit: contain;
         }
 
-        .brand-description {
-          color: var(--text-secondary);
-          line-height: 1.6;
-          max-width: 320px;
+        .footer-logo-text {
+          font-family: var(--font-display);
+          font-weight: 700;
+          font-size: 1.1rem;
+          color: var(--text-primary);
+          letter-spacing: -0.02em;
         }
 
-        /* Links Styles */
-        .footer-links-group h4 {
+        .footer-desc {
+          color: var(--text-secondary);
+          font-size: 0.9rem;
+          line-height: 1.65;
+          max-width: 280px;
+          font-family: var(--font-body);
+        }
+
+        .footer-col-title {
+          font-family: var(--font-display);
+          font-size: 0.95rem;
+          font-weight: 700;
           color: var(--text-primary);
-          font-size: 1.1rem;
-          margin-bottom: 1.5rem;
-          font-weight: 600;
+          margin-bottom: 1.25rem;
+          letter-spacing: -0.01em;
         }
 
         .footer-link {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: 0.6rem;
           color: var(--text-secondary);
-          margin-bottom: 1rem;
-          transition: all 0.2s;
-          text-decoration: none;
+          font-size: 0.875rem;
+          font-family: var(--font-body);
+          margin-bottom: 0.875rem;
+          transition: all 0.2s ease;
         }
 
         .footer-link:hover {
-          color: var(--accent-primary);
-          transform: translateX(4px);
+          color: var(--purple-bright);
+          transform: translateX(3px);
         }
 
-        /* Developers Styles */
-        .developers-list {
+        .devs {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 0.875rem;
         }
 
         .dev-card {
           display: flex;
           align-items: center;
-          gap: 1rem;
-          padding: 0.75rem;
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.05);
+          gap: 0.75rem;
+          padding: 0.7rem 0.875rem;
+          background: rgba(255, 255, 255, 0.025);
+          border: 1px solid var(--border);
           border-radius: var(--radius-md);
-          transition: all 0.3s ease;
-          text-decoration: none;
+          transition: all 0.25s ease;
         }
 
         .dev-card:hover {
-          background: rgba(255, 255, 255, 0.08);
-          border-color: rgba(124, 58, 237, 0.3);
+          background: rgba(255, 255, 255, 0.055);
+          border-color: rgba(108, 43, 217, 0.28);
           transform: translateY(-2px);
         }
 
         .dev-avatar {
-          width: 36px;
-          height: 36px;
+          width: 34px;
+          height: 34px;
           border-radius: 50%;
-          background: var(--accent-primary);
-          color: white;
           display: flex;
           align-items: center;
           justify-content: center;
+          font-size: 0.72rem;
           font-weight: 700;
-          font-size: 0.8rem;
+          color: white;
+          flex-shrink: 0;
+          font-family: var(--font-body);
         }
 
         .dev-info {
@@ -192,63 +191,61 @@ const Footer = () => {
         }
 
         .dev-name {
-          color: var(--text-primary);
+          font-size: 0.85rem;
           font-weight: 600;
-          font-size: 0.9rem;
+          color: var(--text-primary);
+          font-family: var(--font-body);
         }
 
         .dev-role {
+          font-size: 0.72rem;
           color: var(--text-secondary);
-          font-size: 0.75rem;
+          font-family: var(--font-body);
         }
 
-        .dev-icon {
+        .dev-li {
           color: var(--text-secondary);
-          opacity: 0.5;
-          transition: opacity 0.2s;
+          opacity: 0.4;
+          transition: all 0.2s;
+          flex-shrink: 0;
         }
 
-        .dev-card:hover .dev-icon {
+        .dev-card:hover .dev-li {
           opacity: 1;
-          color: #0077b5; /* LinkedIn Color */
+          color: #0077b5;
         }
 
-        /* Bottom Styles */
         .footer-bottom {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding-top: 2rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          padding-top: 1.75rem;
+          border-top: 1px solid var(--border);
           color: var(--text-secondary);
-          font-size: 0.875rem;
+          font-size: 0.82rem;
+          font-family: var(--font-body);
         }
 
         .made-with {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.4rem;
         }
 
-        .heart-icon {
-          color: var(--danger);
-          fill: var(--danger);
+        .heart {
+          color: #FF4455;
+          fill: #FF4455;
         }
 
-        /* Responsive */
         @media (max-width: 900px) {
-          .footer-content {
+          .footer-grid {
             grid-template-columns: 1fr;
-            gap: 3rem;
+            gap: 2.5rem;
           }
-
-          .brand-description {
-            max-width: 100%;
-          }
-          
+          .footer-desc { max-width: 100%; }
           .footer-bottom {
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1rem;
             text-align: center;
           }
         }
