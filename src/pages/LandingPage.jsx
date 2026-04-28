@@ -23,31 +23,40 @@ const css = `
     background: var(--dark);
     color: var(--white);
     overflow-x: hidden;
-    cursor: none;
   }
 
-  .cursor {
-    position: fixed;
-    width: 12px; height: 12px;
-    background: var(--lime);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
-    mix-blend-mode: difference;
+  @media (hover: hover) and (pointer: fine) {
+    body { cursor: none; }
   }
-  .cursor-ring {
-    position: fixed;
-    width: 36px; height: 36px;
-    border: 1.5px solid rgba(207,243,48,0.5);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: all 0.15s ease;
+
+  .cursor, .cursor-ring { display: none; }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cursor {
+      display: block;
+      position: fixed;
+      width: 12px; height: 12px;
+      background: var(--lime);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+      mix-blend-mode: difference;
+    }
+    .cursor-ring {
+      display: block;
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1.5px solid rgba(207,243,48,0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.15s ease;
+    }
+    .cursor.hover { width: 24px; height: 24px; }
   }
-  .cursor.hover { width: 24px; height: 24px; }
 
   nav {
     position: fixed; top: 0; left: 0; right: 0;
@@ -79,7 +88,7 @@ const css = `
     border: none; padding: 11px 24px;
     font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700;
     letter-spacing: 0.5px; text-transform: uppercase;
-    border-radius: 100px; cursor: none;
+    border-radius: 100px;
     transition: background 0.2s, transform 0.2s;
   }
   .nav-cta:hover { background: var(--lime-dark); transform: scale(1.03); }
@@ -157,7 +166,7 @@ const css = `
     background: var(--lime); color: var(--dark);
     border: none; padding: 16px 32px;
     font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
-    border-radius: 100px; cursor: none;
+    border-radius: 100px;
     transition: all 0.25s ease;
     display: flex; align-items: center; gap: 10px;
     letter-spacing: 0.2px;
@@ -173,7 +182,7 @@ const css = `
     background: transparent; color: rgba(255,255,255,0.7);
     border: 1px solid rgba(255,255,255,0.15); padding: 16px 28px;
     font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 400;
-    border-radius: 100px; cursor: none;
+    border-radius: 100px;
     transition: all 0.25s ease;
   }
   .btn-ghost:hover { border-color: rgba(255,255,255,0.4); color: var(--white); }
@@ -346,7 +355,6 @@ const css = `
     position: relative; overflow: hidden;
     border: 1px solid rgba(0,0,0,0.06);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: none;
   }
   .benefit-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,83,239,0.12); }
   .benefit-card:nth-child(2) { background: var(--blue); color: white; }
@@ -383,7 +391,6 @@ const css = `
     border-radius: 24px; padding: 36px;
     position: relative; overflow: hidden;
     transition: border-color 0.3s, transform 0.3s;
-    cursor: none;
   }
   .feature-card:hover { border-color: rgba(207,243,48,0.3); transform: translateY(-3px); }
   .feature-card.featured {
@@ -401,7 +408,7 @@ const css = `
     border: 1px solid rgba(255,255,255,0.06);
   }
   .fc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-  .chip { padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 500; cursor: none; }
+  .chip { padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 500; }
   .chip-active { background: var(--blue); color: white; }
   .chip-lime { background: rgba(207,243,48,0.15); color: var(--lime); border: 1px solid rgba(207,243,48,0.3); }
   .chip-ghost { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.08); }
@@ -478,7 +485,6 @@ const css = `
     background: var(--dark-card);
     border: 1px solid rgba(255,255,255,0.07);
     border-radius: 24px; padding: 32px;
-    cursor: none;
     transition: border-color 0.3s, transform 0.3s;
   }
   .testi-card:hover { border-color: rgba(207,243,48,0.2); transform: translateY(-3px); }
@@ -503,7 +509,7 @@ const css = `
     letter-spacing: -1.5px; line-height: 1.1;
     margin-bottom: 48px; text-align: center;
   }
-  .faq-item { border-bottom: 1px solid rgba(0,0,0,0.1); cursor: none; }
+  .faq-item { border-bottom: 1px solid rgba(0,0,0,0.1); }
   .faq-q {
     padding: 24px 0;
     display: flex; align-items: center; justify-content: space-between;
@@ -511,7 +517,7 @@ const css = `
     font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 600;
     letter-spacing: -0.3px;
     transition: color 0.2s;
-    cursor: none;
+    cursor: pointer;
   }
   .faq-q:hover { color: var(--blue); }
   .faq-toggle {
@@ -592,7 +598,7 @@ const css = `
     border: none; border-radius: 50%;
     width: 32px; height: 32px;
     color: white; font-size: 16px;
-    cursor: none;
+    cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     transition: background 0.2s;
   }
@@ -623,7 +629,7 @@ const css = `
     background: var(--lime); color: var(--dark);
     border: none; border-radius: 14px; padding: 16px;
     font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700;
-    cursor: none; transition: background 0.2s, transform 0.2s;
+    cursor: pointer; transition: background 0.2s, transform 0.2s;
     letter-spacing: 0.3px;
   }
   .modal-submit:hover { background: var(--lime-dark); transform: scale(1.01); }
@@ -704,6 +710,9 @@ const LandingPage = () => {
   };
 
   useEffect(() => {
+    const isTouchDevice = !window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (isTouchDevice) return;
+
     const handleMouseMove = (e) => {
       mxRef.current = e.clientX;
       myRef.current = e.clientY;
@@ -764,6 +773,8 @@ const LandingPage = () => {
   }, []);
 
   useEffect(() => {
+    const isTouchDevice = !window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (isTouchDevice) return;
     document.body.style.cursor = "none";
     return () => { document.body.style.cursor = ""; };
   }, []);
