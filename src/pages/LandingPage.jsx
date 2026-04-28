@@ -664,37 +664,10 @@ const css = `
   }
 `;
 
-const faqData = [
-  {
-    q: "Quando o EAZY vai lançar?",
-    a: "Estamos no beta fechado e abriremos o acesso gradualmente para quem está na lista de espera. Quem entrar primeiro, terá acesso primeiro — e condições especiais de early adopter."
-  },
-  {
-    q: "É pago? Quanto vai custar?",
-    a: "O EAZY terá um plano gratuito robusto pra sempre. Quem está na lista de espera vai ganhar acesso ao plano premium gratuitamente por 3 meses no lançamento. Justo, né?"
-  },
-  {
-    q: "Precisa conectar com o meu banco?",
-    a: "Não precisa, mas você pode. O EAZY funciona perfeitamente com registro manual — super rápido — e também tem integração com Open Finance pra quem quer tudo automático."
-  },
-  {
-    q: "Meus dados estão seguros?",
-    a: "Sim. Criptografia de ponta a ponta, sem venda de dados pra terceiros, servidores no Brasil. Seus dados são seus — simples assim. Levamos privacidade a sério."
-  },
-  {
-    q: "Funciona pra quem ganha pouco ou tem dívidas?",
-    a: "Especialmente pra você. O EAZY não te julga, não te dá sermão. Ele só te mostra a realidade com clareza e te ajuda a dar o próximo passo — independente de onde você está agora."
-  },
-  {
-    q: 'A função "Posso gastar?" é de verdade?',
-    a: 'Sim! É uma das nossas features mais queridas. Você pergunta em linguagem natural, o EAZY analisa seu saldo restante, seus limites por categoria e seu histórico — e responde com clareza. Sem achismo.'
-  }
-];
 
 const LandingPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalSuccess, setModalSuccess] = useState(false);
-  const [openFaq, setOpenFaq] = useState(null);
   const [wlName, setWlName] = useState("");
   const [wlEmail, setWlEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -706,6 +679,29 @@ const LandingPage = () => {
   const rxRef = useRef(0);
   const ryRef = useRef(0);
   const animRef = useRef(null);
+
+  const openModal = () => {
+    setModalOpen(true);
+    setModalSuccess(false);
+    setWlName("");
+    setWlEmail("");
+    setEmailError(false);
+  };
+
+  const closeModal = () => setModalOpen(false);
+
+  const submitWaitlist = () => {
+    if (!wlName || !wlEmail) {
+      setEmailError(true);
+      setTimeout(() => setEmailError(false), 2000);
+      return;
+    }
+    setModalSuccess(true);
+  };
+
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -772,31 +768,6 @@ const LandingPage = () => {
     return () => { document.body.style.cursor = ""; };
   }, []);
 
-  const openModal = () => {
-    setModalOpen(true);
-    setModalSuccess(false);
-    setWlName("");
-    setWlEmail("");
-    setEmailError(false);
-  };
-
-  const closeModal = () => setModalOpen(false);
-
-  const submitWaitlist = () => {
-    if (!wlName || !wlEmail) {
-      setEmailError(true);
-      setTimeout(() => setEmailError(false), 2000);
-      return;
-    }
-    setModalSuccess(true);
-  };
-
-  const toggleFaq = (idx) => setOpenFaq(openFaq === idx ? null : idx);
-
-  const scrollTo = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <div className="lp-page">
       <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -851,8 +822,7 @@ const LandingPage = () => {
         <div className="nav-links">
           <a href="#beneficios">Benefícios</a>
           <a href="#funcionalidades">Funcionalidades</a>
-          <a href="#depoimentos">Depoimentos</a>
-          <a href="#faq">FAQ</a>
+          <a href="#funcionalidades">Funcionalidades</a>
         </div>
         <button className="nav-cta" onClick={openModal}>Entrar na lista</button>
       </nav>
@@ -862,7 +832,7 @@ const LandingPage = () => {
         <div className="hero-bg"></div>
         <div className="hero-grid"></div>
         <div className="hero-left">
-          <div className="hero-badge">✦ Em breve — vagas limitadas</div>
+          <div className="hero-badge">✦ Em breve</div>
           <h1>
             Até quando você vai<br />
             esperar suas <span className="accent">finanças</span><br />
@@ -876,18 +846,6 @@ const LandingPage = () => {
               <div className="arrow">→</div>
             </button>
             <button className="btn-ghost" onClick={() => scrollTo("funcionalidades")}>Ver como funciona</button>
-          </div>
-          <div className="hero-proof">
-            <div className="proof-avatars">
-              <div className="av av-1">M</div>
-              <div className="av av-2">J</div>
-              <div className="av av-3">A</div>
-              <div className="av av-4">R</div>
-            </div>
-            <div className="proof-text">
-              <strong>+12.000 pessoas</strong> já estão na lista<br />
-              de espera. Você é o próximo?
-            </div>
           </div>
         </div>
         <div className="hero-right">
@@ -1024,6 +982,47 @@ const LandingPage = () => {
               <div className="answer-bubble">✅ Sim! Você tem R$ 847 livres e ainda está no ritmo certo pro mês. Vai lá!</div>
             </div>
           </div>
+
+          <div className="feature-card reveal">
+            <div className="fc-number">05</div>
+            <div className="fc-title">Gerenciamento de assinaturas</div>
+            <div className="fc-desc">Veja todas as suas assinaturas em um só lugar. Spotify, Netflix, academia — o EAZY mapeia tudo e te avisa quando uma renovação está chegando.</div>
+            <div className="fc-visual">
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                {[
+                  { icon: "🎵", name: "Spotify", value: "R$ 21,90", color: "var(--lime)" },
+                  { icon: "🎬", name: "Netflix", value: "R$ 44,90", color: "#FFB547" },
+                  { icon: "🏋️", name: "Academia", value: "R$ 89,90", color: "var(--lime)" },
+                ].map((s, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(255,255,255,0.04)", borderRadius: "10px", padding: "10px 14px", border: "1px solid rgba(255,255,255,0.06)" }}>
+                    <span style={{ fontSize: "14px" }}>{s.icon} {s.name}</span>
+                    <span style={{ fontSize: "13px", fontWeight: 700, color: s.color }}>{s.value}</span>
+                  </div>
+                ))}
+                <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.3)", marginTop: "4px" }}>Total mensal: R$ 156,70</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="feature-card reveal reveal-delay-1">
+            <div className="fc-number">06</div>
+            <div className="fc-title">Gestão de dívidas</div>
+            <div className="fc-desc">Parcelas, empréstimos, cartão — tudo organizado. Saiba exatamente quanto deve, pra quem, e quando você quita cada dívida.</div>
+            <div className="fc-visual">
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
+                <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.4)" }}>Total em dívidas</span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", fontWeight: 800, color: "#FF6B6B" }}>R$ 3.200</span>
+              </div>
+              <div className="limit-bar-wrap">
+                <div className="limit-label"><span>💳 Cartão Nubank</span><span>R$ 1.200</span></div>
+                <div className="limit-bar"><div className="limit-fill fill-warn" style={{ width: "60%" }}></div></div>
+              </div>
+              <div className="limit-bar-wrap" style={{ marginTop: "12px" }}>
+                <div className="limit-label"><span>🏦 Empréstimo</span><span>R$ 2.000</span></div>
+                <div className="limit-bar"><div className="limit-fill fill-bad" style={{ width: "30%" }}></div></div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1054,58 +1053,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <section className="testimonials" id="depoimentos">
-        <h2 className="reveal">O que quem está na<br />lista está dizendo <span className="accent">↓</span></h2>
-        <div className="testi-grid">
-          {[
-            {
-              quote: <>&#34;Eu tentei 4 apps de finanças nos últimos 2 anos. Todos me abandonei depois de uma semana. O EAZY parece que foi feito pra mim — <strong>simples do jeito que eu precisava.</strong>&#34;</>,
-              name: "Mariana Costa", role: "Designer, 26 anos · São Paulo",
-              av: "M", avStyle: { background: "linear-gradient(135deg, #FF6B6B, #FE3F80)" }, delay: ""
-            },
-            {
-              quote: <>&#34;A função &#39;Posso gastar?&#39; mudou minha vida. Sério. Eu ficava com aquela ansiedade toda vez que ia comprar algo. <strong>Agora eu simplesmente pergunto e sei na hora.</strong>&#34;</>,
-              name: "João Pedro S.", role: "Dev, 29 anos · Belo Horizonte",
-              av: "J", avStyle: { background: "linear-gradient(135deg, #4ECDC4, #44A08D)" }, delay: " reveal-delay-1"
-            },
-            {
-              quote: <>&#34;Finalmente um app que não me faz sentir burra por não entender finanças. O painel é tão claro que em 10 segundos eu já sei se o mês tá bom ou não. <strong>Isso é o que eu sempre quis.</strong>&#34;</>,
-              name: "Ana Rodrigues", role: "Nutricionista, 24 anos · Rio de Janeiro",
-              av: "A", avStyle: { background: "linear-gradient(135deg, #A78BFA, #8B5CF6)" }, delay: " reveal-delay-2"
-            },
-          ].map((t, i) => (
-            <div key={i} className={`testi-card reveal${t.delay}`}>
-              <div className="testi-stars">★★★★★</div>
-              <div className="testi-quote">{t.quote}</div>
-              <div className="testi-author">
-                <div className="testi-av" style={t.avStyle}>{t.av}</div>
-                <div>
-                  <div className="testi-name">{t.name}</div>
-                  <div className="testi-role">{t.role}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="faq" id="faq">
-        <div className="faq-wrap">
-          <h2 className="reveal">Perguntas<br />frequentes</h2>
-          {faqData.map((item, idx) => (
-            <div key={idx} className={`faq-item reveal${idx > 0 ? ` reveal-delay-${Math.min(idx, 4)}` : ""}${openFaq === idx ? " open" : ""}`}>
-              <div className="faq-q" onClick={() => toggleFaq(idx)}>
-                {item.q}
-                <div className="faq-toggle">+</div>
-              </div>
-              <div className="faq-a">{item.a}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* FINAL CTA */}
       <section className="final-cta">
         <div className="final-cta-bg"></div>
@@ -1131,7 +1078,7 @@ const LandingPage = () => {
           <Link to="/politica-de-privacidade">Privacidade</Link>
           <Link to="/termos-de-uso">Termos</Link>
           <a href="mailto:contato@eazyfinancas.com.br">Contato</a>
-          <a href="https://instagram.com/eazyfinancas" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://www.instagram.com/eazy.app/" target="_blank" rel="noopener noreferrer">Instagram</a>
         </div>
         <div className="footer-copy">© 2025 EAZY Finanças. Feito com ♥ no Brasil.</div>
       </footer>
